@@ -4,23 +4,35 @@ using UnityEngine;
 
 public class GhostMove : MonoBehaviour
 {
-    private Vector3 moveDirection; //See player script.
+    //ChatGPT assisted with the debugging process of the object movement loop, suggesting I use box colliders for the empty objects.
+    private Vector3 moveDirection;
     public float Speed = 2f;
+
+    private void Start()
+    {
+        //See player script.
+        moveDirection = Vector3.right;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Way2") ; //Checks if the object has met an object and turns the other way once collided.
+        //Checks if object is moving right and if colliding with the object, it will turn left.
+        if (collision.gameObject.tag == "Way2")
         {
-            moveDirection = Vector3.left;
+            moveDirection = Vector3.left; // Move left.
         }
-        if (collision.gameObject.tag == "Way1") ; //Same as above.
+        //Same as above, but the opposite direction.
+        else if (collision.gameObject.tag == "Way1")
         {
-            moveDirection = Vector3.right;
+            moveDirection = Vector3.right; // Move right.
         }
     }
 
     private void Update()
     {
-        transform.Translate(moveDirection * Speed * Time.deltaTime); //See player script.
+        //See player script.
+        transform.Translate(moveDirection * Speed * Time.deltaTime);
     }
 }
+
+
