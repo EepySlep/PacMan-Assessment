@@ -4,14 +4,33 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public Rigidbody2D rb;
-    public float moveSpeed = 5f;
+    public float moveSpeed = 5f; //Speed at which Pac-Man moves.
 
-    public void Update()
+    private Vector3 moveDirection; //Stores movement direction.
+
+    void Update()
     {
-        float moveX = Input.GetAxis("Horizontal");
-        float moveY = Input.GetAxis("Vertical");
+        //Old input system utilising W,A,S,D as the main source of movement.
+        moveDirection = Vector3.zero;
 
-        rb.velocity = new Vector2(moveX,moveY)*Time.deltaTime;
+        if (Input.GetKey(KeyCode.W)) //Moving up.
+        {
+            moveDirection = Vector3.up;
+        }
+        else if (Input.GetKey(KeyCode.S)) //Moving down.
+        {
+            moveDirection = Vector3.down;
+        }
+        else if (Input.GetKey(KeyCode.A)) //Moving left.
+        {
+            moveDirection = Vector3.left;
+        }
+        else if (Input.GetKey(KeyCode.D)) //Moving right.
+        {
+            moveDirection = Vector3.right;
+        }
+
+        //Move Pac-Man according to the time taken from player input.
+        transform.Translate(moveDirection * moveSpeed * Time.deltaTime);
     }
 }
