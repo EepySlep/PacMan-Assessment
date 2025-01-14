@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GhostMove : MonoBehaviour
 {
-    private Vector3 moveDirection; //Stores movement direction.
+    private Vector3 moveDirection; //See player script.
     public float Speed = 2f;
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -13,11 +13,14 @@ public class GhostMove : MonoBehaviour
         {
             moveDirection = Vector3.left;
         }
-
+        if (collision.gameObject.tag == "Way1") ; //Same as above.
+        {
+            moveDirection = Vector3.right;
+        }
     }
 
     private void Update()
     {
-        transform.Translate(moveDirection * Speed * Time.deltaTime);
+        transform.Translate(moveDirection * Speed * Time.deltaTime); //See player script.
     }
 }
