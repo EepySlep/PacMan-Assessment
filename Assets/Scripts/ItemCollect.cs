@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class ItemCollect : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (other.gameObject.tag == "Collectible") ;
+        {
+            print("Collected");
+            gameObject.active = false;
+        }
     }
 }
